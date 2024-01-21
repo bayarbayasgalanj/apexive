@@ -8,6 +8,7 @@
 ![ss_code3.png](static/description/images/ss_code3.png)
 # 4. Javascript codes.
 ![ss_code4.png](static/description/images/ss_code4.png)
+![ss_code4_1.png](static/description/images/ss_code4_1.png)
 # 5. XML codes.
 ![ss_code5.png](static/description/images/ss_code5.png)
 ![ss_code6.png](static/description/images/ss_code6.png)
