@@ -1,4 +1,4 @@
-# Bayar Modification of Attendance Module in Odoo for Apexive
+# Bayar Modification of Attendance Module in Odoo 16 for Apexive
 # Code structure
 # 1. This is main code structure
 ![ss_code1.png](static/description/images/ss_code1.png)
@@ -14,3 +14,6 @@
 ![ss_code6.png](static/description/images/ss_code6.png)
 # 6. Just only one function overrided!!. I tried many times without overriding. But it was impossible.
 ![ss_code7.png](static/description/images/ss_code7.png)
+# 7. You can see all features from Modules description
+![ss_code8.png](static/description/images/ss_code8.png)
+![ss_code9.png](static/description/images/ss_code9.png)
