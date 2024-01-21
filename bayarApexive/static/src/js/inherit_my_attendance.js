@@ -8,6 +8,7 @@ odoo.define('bayarApexive.inherit_my_attendance', function (require) {
         events: Object.assign({}, MyAttendances.prototype.events, {
             'change select[id="projectSelect"]': '_onChangeProjectSelect',
         }),
+        // When change the js project, It will set project task with this project
         _onChangeProjectSelect: function (ev) {
             if (this.$("#projectSelect")[0]) {
                 const projectID = this.$("select[name='project_id']").val();
@@ -22,6 +23,7 @@ odoo.define('bayarApexive.inherit_my_attendance', function (require) {
                 this.$("#projectTaskSelect").replaceWith(selectHtml);
             }
         },
+        // When it start Attendance, collection current attendances data with project, project task and description from backend
         willStart: function () {
             var self = this;
             return this._super.apply(this, arguments).then(function () {
@@ -35,6 +37,7 @@ odoo.define('bayarApexive.inherit_my_attendance', function (require) {
                 });
             });
         },
+        // Just only one function overrided!!. I tried many times without overriding. But it was impossible.
         update_attendance: function () {
             var self = this;
             var context = session.user_context;

@@ -4,6 +4,7 @@ from odoo import api, fields, models, tools, modules
 class HrAttendance(models.Model):
     _inherit = 'hr.attendance'
     
+    # Necessary fields
     project_id = fields.Many2one('project.project', string="Project")
     project_task_id = fields.Many2one('project.task', string="Task", domain="[('project_id','!=',False), ('project_id','=',project_id), ('is_closed','=',False)]")
     description = fields.Text(string="Descriptions")
@@ -11,6 +12,7 @@ class HrAttendance(models.Model):
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
     
+    # Helpful fields
     attendance_project_id = fields.Many2one('project.project',
         string="Attendance Project", compute='_compute_attendance_project',
         groups="hr_attendance.group_hr_attendance_kiosk,hr_attendance.group_hr_attendance,hr.group_hr_user")
@@ -20,6 +22,7 @@ class HrEmployee(models.Model):
     attendance_description = fields.Text(string="Attendance Descriptions", compute='_compute_attendance_project',
         groups="hr_attendance.group_hr_attendance_kiosk,hr_attendance.group_hr_attendance,hr.group_hr_user")
     
+    # Help function releave the last attendance's project, project task and description
     @api.depends('last_attendance_id.check_in', 'last_attendance_id.check_out', 'last_attendance_id')
     def _compute_attendance_project(self):
         for employee in self:
@@ -34,6 +37,7 @@ class HrEmployee(models.Model):
                 employee.attendance_project_task_id = False
                 employee.attendance_description = False
 
+    # Asistance function sending JS code
     @api.model
     def get_attendance_projects(self, domain):
         projects = self.env['project.project'].search([])
@@ -46,7 +50,7 @@ class HrEmployee(models.Model):
             'current_project_task_id': {'id': emp_id.attendance_project_task_id.id, 'name':emp_id.attendance_project_task_id.display_name} if emp_id.attendance_project_task_id and emp_id.attendance_project_task_id.id in tasks.ids else False,
             'current_description': emp_id.attendance_description or False,
         }
-
+    # Inherited _attendance_action_change function to update new project_id, project_task_id and description field
     def _attendance_action_change(self):
         res = super(HrEmployee, self)._attendance_action_change()
         project_id = self.env.context.get('project_id', False)
